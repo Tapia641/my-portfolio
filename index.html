@@ -1,123 +1,542 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-
-<!--HEAD SECTION 🤕 -->
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="This is my presentation">
-    <meta name="author" content="Luis Enrique Hernández Tapia">
-    <title>Luis Tapia 👌</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luis Tapia — Portfolio</title>
+<meta name="description" content="Portfolio of software engineering projects, case studies, and contact information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF8;
+    --ink:#1B1B1D;
+    --ink-soft:#55585c;
+    --line:#E4E1D9;
+    --accent:#2D5C57;
+    --accent-soft:#E7EFE9;
+    --card-bg:#FFFFFF;
+    --radius:14px;
+    --shadow: 0 1px 2px rgba(27,27,29,0.04), 0 8px 24px rgba(27,27,29,0.06);
+    --maxw:1180px;
+    --tag-bg:#F1EFE7;
+  }
+  html[data-theme="bw"]{
+    --paper:#FFFFFF;
+    --ink:#000000;
+    --ink-soft:#3a3a3a;
+    --line:#000000;
+    --accent:#000000;
+    --accent-soft:#000000;
+    --card-bg:#FFFFFF;
+    --shadow:none;
+    --tag-bg:#000000;
+  }
+  html[data-theme="bw"] body{ filter:contrast(1.05); }
+  html[data-theme="bw"] .tag{ color:#fff; }
+  html[data-theme="bw"] .card{ border:2px solid #000; }
+  html[data-theme="bw"] .btn-primary{ background:#000; color:#fff; }
+  html[data-theme="bw"] img, html[data-theme="bw"] svg{ filter:grayscale(1) contrast(1.1); }
 
-    <!-- BOOTSTRAP CORE CSS -->
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background .25s ease,color .25s ease;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 28px; max-width:var(--maxw); margin:0 auto;}
+  .brand{font-family:'Fraunces',serif; font-weight:600; font-size:19px;}
+  .nav-links{display:flex; gap:28px; font-size:14px; align-items:center;}
+  .nav-links a{text-decoration:none; color:var(--ink-soft); transition:color .2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .controls{display:flex; gap:10px; align-items:center;}
+  .ctrl-btn{
+    border:1px solid var(--line); background:var(--card-bg); color:var(--ink);
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    padding:8px 12px; border-radius:999px; cursor:pointer;
+    display:flex; gap:6px; align-items:center;
+  }
+  .ctrl-btn:hover{border-color:var(--accent);}
+  .ctrl-btn:focus-visible, a:focus-visible, .card:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 64px; border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid; grid-template-columns:1.3fr .7fr; gap:48px; align-items:end;}
+  .hero h1{font-size:clamp(40px,6vw,68px); line-height:1.02; font-weight:600;}
+  .hero .role{font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--accent); margin-top:18px; letter-spacing:.04em;}
+  .hero p.lede{font-size:18px; color:var(--ink-soft); max-width:560px; margin-top:18px; line-height:1.6;}
+  .hero-stats{display:flex; flex-direction:column; gap:18px; border-left:1px solid var(--line); padding-left:32px;}
+  .stat-num{font-family:'Fraunces',serif; font-size:34px; font-weight:600;}
+  .stat-label{font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft);}
+  .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:999px; font-size:14px; font-weight:600;
+    text-decoration:none; cursor:pointer; border:1px solid var(--ink); transition:all .2s;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-primary:hover{background:var(--accent); border-color:var(--accent);}
+  .btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* ---------- section heading ---------- */
+  .section{padding:80px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; gap:24px; flex-wrap:wrap;}
+  .section-head h2{font-size:34px; font-weight:600;}
+
+  /* ---------- filters ---------- */
+  .filters{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px;}
+  .filter-pill{
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    border:1px solid var(--line); background:transparent; color:var(--ink-soft);
+    padding:8px 16px; border-radius:999px; cursor:pointer; transition:all .15s;
+  }
+  .filter-pill.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .filter-pill:hover{border-color:var(--ink);}
+
+  /* ---------- project grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .card{
+    background:var(--card-bg); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; display:flex; flex-direction:column; gap:14px;
+    box-shadow:var(--shadow); transition:transform .25s ease, box-shadow .25s ease;
+    position:relative; overflow:hidden;
+  }
+  .card:hover{transform:translateY(-4px);}
+  .card-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .card h3{font-size:21px; font-weight:600;}
+  .card-cat{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:.06em;}
+  .card p.desc{font-size:14.5px; color:var(--ink-soft); line-height:1.55; flex-grow:1;}
+  .tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:11px; background:var(--tag-bg);
+    color:var(--ink); padding:4px 10px; border-radius:6px;
+  }
+  .card-actions{display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;}
+  .card-actions a{
+    font-size:13px; font-weight:600; text-decoration:none;
+    border:1px solid var(--line); padding:8px 14px; border-radius:999px;
+    display:inline-flex; align-items:center; gap:6px; transition:all .15s;
+  }
+  .card-actions a.primary{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .card-actions a.primary:hover{background:var(--accent); border-color:var(--accent);}
+  .card-actions a:not(.primary):hover{border-color:var(--ink);}
+  .related-strip{margin-top:6px; padding-top:10px; border-top:1px dashed var(--line);}
+  .related-strip span.lbl{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em;}
+  .related-strip .chips{display:flex; gap:6px; margin-top:6px; flex-wrap:wrap;}
+  .chip{font-size:11.5px; color:var(--accent); border-bottom:1px solid transparent; cursor:pointer;}
+  .chip:hover{border-bottom-color:var(--accent);}
+
+  /* ---------- about ---------- */
+  .about{border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px;}
+  .about p{color:var(--ink-soft); line-height:1.7; font-size:16px;}
+  .skills{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;}
+  .skill-pill{font-family:'JetBrains Mono',monospace; font-size:12px; border:1px solid var(--line); padding:6px 12px; border-radius:999px;}
+  .about-actions{display:flex; gap:12px; margin-top:26px;}
+
+  /* ---------- contact ---------- */
+  .contact{text-align:center; padding:90px 0;}
+  .contact h2{font-size:38px; margin-bottom:14px;}
+  .contact p{color:var(--ink-soft); font-size:16px; margin-bottom:30px;}
+  .contact-links{display:flex; justify-content:center; gap:16px; flex-wrap:wrap;}
+
+  footer{border-top:1px solid var(--line); padding:28px 0; text-align:center; font-size:13px; color:var(--ink-soft);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-stats{flex-direction:row; border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:24px; gap:32px;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .about-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+  @media (max-width:600px){
+    .grid{grid-template-columns:1fr;}
+    .hero{padding:64px 0 40px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+  }
+</style>
 </head>
-
-<!-- BODY SECTION 👍 -->
 <body>
 
-<!-- HEADER SECTION 😁 -->
 <header>
-    <!--    NAVIGATION BAR SECTION 🧭 -->
-    <div class="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div class="container px-5">
-            <a class="navbar-brand" href="index.html"><span class="fw-light text-black-50">Done with: <img src="assets/brand/bootstrap-logo.svg" width="35rem" height="30rem" alt="Bootstrap 5"> <img src="assets/brand/html-5-svgrepo-com.svg" width="42rem" height="38rem" alt="HTML5"> </span></a>
-            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
-                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-        </div>
+  <div class="nav">
+    <div class="brand">Luis Tapia</div>
+    <nav class="nav-links">
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="controls">
+      <button class="ctrl-btn" id="langToggle" aria-label="Toggle language">EN / ES</button>
+      <button class="ctrl-btn" id="themeToggle" aria-label="Toggle high-contrast mode">◐ <span data-i18n="ctrl.theme">Contrast</span></button>
     </div>
-
+  </div>
 </header>
 
-<!--MAIN SECTION 👁️ -->
-<main>
-
-    <header class="py-5">
-        <div class="container px-5 pb-5">
-            <div class="row gx-5 align-items-center">
-                <div class="col-xxl-5">
-
-                    <!-- Header text content-->
-                    <div class="text-center text-xxl-start">
-
-                        <div class="badge bg-gradient-primary-to-secondary text-black-50 mb-4">
-                            <div class="text-uppercase">Automation, backend and network engineer</div>
-                        </div>
-
-                        <div class="fs-3 fw-light text-muted">I can help your company as a</div>
-
-                        <h1 class="display-3 fw-bolder mb-5"><span
-                                class="text-gradient d-inline">Software Developer</span>
-                        </h1>
-
-                        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                            <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder"
-                               href="resume.html">Resume</a>
-                            <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="projects.html">Projects</a>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xxl-7">
-                    <!-- Header profile picture-->
-                    <div class="d-flex justify-content-center mt-5 mt-xxl-0">
-                        <div class="profile bg-gradient-primary-to-secondary">
-                            <img class="profile-img" src="assets/brand/profile.png" alt="...">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section class="bg-light py-5">
-        <div class="container px-5">
-            <div class="row gx-5 justify-content-center">
-                <div class="col-xxl-8">
-                    <div class="text-center my-5">
-                        <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About Me</span></h2>
-                        <p class="lead fw-light mb-4">My name is Luis Enrique Tapia and I help companies grow.</p>
-                        <p class="text-muted">I am an Automation Developer with expertise in Ansible and Python. In my
-                            role, I design, implement, and maintain automation solutions that streamline IT operations.
-                            I create Ansible playbooks and Python scripts to automate repetitive tasks, configure
-                            infrastructure, and orchestrate complex workflows. Collaborating with cross-functional
-                            teams, I ensure that automation solutions improve efficiency and reduce manual intervention,
-                            aligning with the organization's infrastructure and application deployment goals.</p>
-                        <div class="d-flex justify-content-center fs-2 gap-4">
-                            <a class="text-gradient" href="#!"><i class="bi bi-linkedin"></i></a>
-                            <a class="text-gradient" href="#!"><i class="bi bi-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<!-- FOOTER SECTION 👣 -->
-<footer class="bg-light text-center py-4">
-    <div class="container">
-        <p>&copy; 2023 Tapia. All rights reserved.</p>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="hero.eyebrow">Software & Network Engineer</div>
+      <h1 data-i18n="hero.title">Projects that ship,<br>scale, and stay simple.</h1>
+      <p class="role" data-i18n="hero.role">Open to full-time and contract roles</p>
+      <p class="lede" data-i18n="hero.lede">I build reliable backend systems and the occasional delightful frontend. Below is a working selection of projects pulled directly from my GitHub — code, demos, and the reasoning behind each one.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#work" data-i18n="hero.ctaWork">View projects</a>
+        <a class="btn btn-ghost" href="/resume.pdf" data-i18n="hero.ctaResume">Download résumé</a>
+      </div>
     </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">12</div>
+        <div class="stat-label" data-i18n="hero.stat1">Shipped projects</div>
+      </div>
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label" data-i18n="hero.stat2">Years building software</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label" data-i18n="hero.stat3">Production systems at scale</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="work.eyebrow">Selected work</div>
+        <h2 data-i18n="work.title">Projects</h2>
+      </div>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter-pill active" data-filter="all" data-i18n="filter.all">All</button>
+      <button class="filter-pill" data-filter="backend" data-i18n="filter.backend">Backend</button>
+      <button class="filter-pill" data-filter="data" data-i18n="filter.data">Data &amp; ML</button>
+      <button class="filter-pill" data-filter="frontend" data-i18n="filter.frontend">Frontend</button>
+      <button class="filter-pill" data-filter="tools" data-i18n="filter.tools">Dev Tools</button>
+    </div>
+
+    <div class="grid" id="projectGrid"></div>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow" data-i18n="about.eyebrow">About me</div>
+      <h2 data-i18n="about.title">Luis Tapia</h2>
+      <div class="about-actions">
+        <a class="btn btn-primary" href="/resume.pdf" data-i18n="about.resume">View résumé</a>
+        <a class="btn btn-ghost" href="https://github.com/yourusername" data-i18n="about.github">GitHub profile</a>
+      </div>
+    </div>
+    <div>
+      <p data-i18n="about.p1">I'm a backend-leaning software engineer who enjoys turning ambiguous problems into systems that are boring in the best way: predictable, observable, and easy to hand off. My work spans distributed systems, data pipelines, and developer tooling, with a growing interest in applied machine learning.</p>
+      <p data-i18n="about.p2">Most of what I build lives in public on GitHub. Each project below links to its source and, where it makes sense, a live demo — so you can see the work, not just read about it.</p>
+      <div class="skills">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Go</span>
+        <span class="skill-pill">TypeScript</span>
+        <span class="skill-pill">PostgreSQL</span>
+        <span class="skill-pill">Kafka</span>
+        <span class="skill-pill">Docker</span>
+        <span class="skill-pill">AWS</span>
+        <span class="skill-pill">React</span>
+        <span class="skill-pill">CI/CD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2 data-i18n="contact.title">Let's talk</h2>
+    <p data-i18n="contact.lede">Reviewing this for a role? I'm happy to walk through any project in more depth.</p>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:tapia641@gmail.com" data-i18n="contact.email">Email me</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/hetl-tapia/" data-i18n="contact.linkedin">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/tapia641" data-i18n="contact.github">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-i18n="footer.text">Built with HTML, CSS, and vanilla JS. © 2026 Luis Tapia.</span>
 </footer>
 
-<!-- BOOTSTRAP CORE CSS -->
-<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ============== PROJECT DATA ==============
+   Add new projects here — the grid, filters, and "related" chips
+   are all generated from this single array. */
+const PROJECTS = [
+  {
+    id: "ledger-sync",
+    category: "backend",
+    title: { en: "LedgerSync", es: "LedgerSync" },
+    desc: {
+      en: "Event-sourced reconciliation engine processing 2M+ financial transactions/day with exactly-once delivery guarantees.",
+      es: "Motor de reconciliación basado en eventos que procesa más de 2M de transacciones financieras al día con entrega garantizada exactamente una vez."
+    },
+    tech: ["Go", "Kafka", "PostgreSQL", "Docker"],
+    demo: "https://ledgersync-demo.example.com",
+    repo: "https://github.com/yourusername/ledger-sync",
+    related: ["queue-router", "infra-as-code"]
+  },
+  {
+    id: "queue-router",
+    category: "backend",
+    title: { en: "QueueRouter", es: "QueueRouter" },
+    desc: {
+      en: "Lightweight message router with priority lanes and backpressure, built to replace a brittle cron-based job queue.",
+      es: "Enrutador de mensajes ligero con carriles de prioridad y control de flujo, creado para reemplazar una cola de trabajos basada en cron poco confiable."
+    },
+    tech: ["Python", "Redis", "FastAPI"],
+    demo: null,
+    repo: "https://github.com/yourusername/queue-router",
+    related: ["ledger-sync"]
+  },
+  {
+    id: "churn-predictor",
+    category: "data",
+    title: { en: "Churn Predictor", es: "Predictor de Abandono" },
+    desc: {
+      en: "Gradient-boosted churn model with a feature pipeline and an explainability dashboard for non-technical stakeholders.",
+      es: "Modelo de abandono basado en gradient boosting con un pipeline de características y un panel de explicabilidad para usuarios no técnicos."
+    },
+    tech: ["Python", "scikit-learn", "Pandas", "Streamlit"],
+    demo: "https://churn-demo.example.com",
+    repo: "https://github.com/yourusername/churn-predictor",
+    related: ["log-anomaly"]
+  },
+  {
+    id: "log-anomaly",
+    category: "data",
+    title: { en: "Log Anomaly Detector", es: "Detector de Anomalías en Logs" },
+    desc: {
+      en: "Streaming anomaly detection over application logs using rolling statistics, cutting alert noise by 60%.",
+      es: "Detección de anomalías en tiempo real sobre logs de aplicación usando estadísticas móviles, reduciendo el ruido de alertas en un 60%."
+    },
+    tech: ["Python", "Kafka", "NumPy"],
+    demo: null,
+    repo: "https://github.com/yourusername/log-anomaly",
+    related: ["churn-predictor", "queue-router"]
+  },
+  {
+    id: "portfolio-cms",
+    category: "frontend",
+    title: { en: "Portfolio CMS", es: "CMS de Portafolio" },
+    desc: {
+      en: "Headless content layer for developer portfolios with live preview, used as the engine behind this very page.",
+      es: "Capa de contenido headless para portafolios de desarrolladores con vista previa en vivo, el motor detrás de esta misma página."
+    },
+    tech: ["TypeScript", "React", "Vite"],
+    demo: "https://portfolio-cms-demo.example.com",
+    repo: "https://github.com/yourusername/portfolio-cms",
+    related: ["dashboard-kit"]
+  },
+  {
+    id: "dashboard-kit",
+    category: "frontend",
+    title: { en: "Dashboard Kit", es: "Kit de Paneles" },
+    desc: {
+      en: "Accessible, themeable charting components built on top of D3, with keyboard navigation and screen-reader labels.",
+      es: "Componentes de gráficos accesibles y personalizables construidos sobre D3, con navegación por teclado y etiquetas para lectores de pantalla."
+    },
+    tech: ["React", "D3.js", "TypeScript"],
+    demo: "https://dashboard-kit-demo.example.com",
+    repo: "https://github.com/yourusername/dashboard-kit",
+    related: ["portfolio-cms"]
+  },
+  {
+    id: "infra-as-code",
+    category: "tools",
+    title: { en: "Infra-as-Code Starter", es: "Plantilla de Infraestructura como Código" },
+    desc: {
+      en: "Opinionated Terraform + GitHub Actions starter that takes a new service from zero to a deployed staging environment in one PR.",
+      es: "Plantilla de Terraform y GitHub Actions que lleva un nuevo servicio de cero a un entorno de staging desplegado en un solo PR."
+    },
+    tech: ["Terraform", "AWS", "GitHub Actions"],
+    demo: null,
+    repo: "https://github.com/yourusername/infra-as-code",
+    related: ["ledger-sync"]
+  },
+  {
+    id: "cli-snap",
+    category: "tools",
+    title: { en: "snap-cli", es: "snap-cli" },
+    desc: {
+      en: "A tiny CLI that snapshots and diffs local database state during migrations, now used across three internal teams.",
+      es: "Una CLI pequeña que captura y compara el estado de la base de datos local durante migraciones, usada en tres equipos internos."
+    },
+    tech: ["Go", "SQLite"],
+    demo: null,
+    repo: "https://github.com/yourusername/snap-cli",
+    related: ["queue-router"]
+  }
+];
 
+const I18N = {
+  en: {
+    "nav.work":"Work","nav.about":"About","nav.contact":"Contact",
+    "ctrl.theme":"Contrast",
+    "hero.eyebrow":"Software & Network Engineer",
+    "hero.title":"Projects that ship,<br>scale, and stay simple.",
+    "hero.role":"Open to full-time and contract roles",
+    "hero.lede":"I build reliable backend systems and the occasional delightful frontend. Below is a working selection of projects pulled directly from my GitHub — code, demos, and the reasoning behind each one.",
+    "hero.ctaWork":"View projects","hero.ctaResume":"Download résumé",
+    "hero.stat1":"Shipped projects","hero.stat2":"Years building software","hero.stat3":"Production systems at scale",
+    "work.eyebrow":"Selected work","work.title":"Projects",
+    "filter.all":"All","filter.backend":"Backend","filter.data":"Data & ML","filter.frontend":"Frontend","filter.tools":"Dev Tools",
+    "about.eyebrow":"About me","about.title":"Luis Tapia","about.resume":"View résumé","about.github":"GitHub profile",
+    "about.p1":"I'm a backend-leaning software engineer who enjoys turning ambiguous problems into systems that are boring in the best way: predictable, observable, and easy to hand off. My work spans distributed systems, data pipelines, and developer tooling, with a growing interest in applied machine learning.",
+    "about.p2":"Most of what I build lives in public on GitHub. Each project below links to its source and, where it makes sense, a live demo — so you can see the work, not just read about it.",
+    "contact.title":"Let's talk","contact.lede":"Reviewing this for a role? I'm happy to walk through any project in more depth.",
+    "contact.email":"Email me","contact.linkedin":"LinkedIn","contact.github":"GitHub",
+    "footer.text":"Built with HTML, CSS, and vanilla JS. © 2026 Luis Tapia.",
+    "card.demo":"View live demo","card.repo":"Explore on GitHub","card.related":"Related projects"
+  },
+  es: {
+    "nav.work":"Proyectos","nav.about":"Acerca","nav.contact":"Contacto",
+    "ctrl.theme":"Contraste",
+    "hero.eyebrow":"Ingeniero de Software — Backend y Sistemas Distribuidos",
+    "hero.title":"Proyectos que se lanzan,<br>escalan y se mantienen simples.",
+    "hero.role":"Disponible para roles de tiempo completo y por contrato",
+    "hero.lede":"Construyo sistemas backend confiables y, de vez en cuando, un frontend agradable. A continuación hay una selección de proyectos tomados directamente de mi GitHub: código, demos y el razonamiento detrás de cada uno.",
+    "hero.ctaWork":"Ver proyectos","hero.ctaResume":"Descargar currículum",
+    "hero.stat1":"Proyectos lanzados","hero.stat2":"Años desarrollando software","hero.stat3":"Sistemas en producción a escala",
+    "work.eyebrow":"Trabajo seleccionado","work.title":"Proyectos",
+    "filter.all":"Todos","filter.backend":"Backend","filter.data":"Datos y ML","filter.frontend":"Frontend","filter.tools":"Herramientas",
+    "about.eyebrow":"Acerca de mí","about.title":"Luis Tapia","about.resume":"Ver currículum","about.github":"Perfil de GitHub",
+    "about.p1":"Soy un ingeniero de software orientado a backend que disfruta convertir problemas ambiguos en sistemas aburridos en el mejor sentido: predecibles, observables y fáciles de transferir. Mi trabajo abarca sistemas distribuidos, pipelines de datos y herramientas para desarrolladores, con un interés creciente en aprendizaje automático aplicado.",
+    "about.p2":"La mayor parte de lo que construyo está disponible públicamente en GitHub. Cada proyecto a continuación enlaza a su código fuente y, cuando tiene sentido, a una demo en vivo, para que pueda ver el trabajo y no solo leer sobre él.",
+    "contact.title":"Hablemos","contact.lede":"¿Estás revisando esto para un puesto? Con gusto puedo explicar cualquier proyecto con más detalle.",
+    "contact.email":"Envíame un correo","contact.linkedin":"LinkedIn","contact.github":"GitHub",
+    "footer.text":"Construido con HTML, CSS y JS puro. © 2026 Luis Tapia.",
+    "card.demo":"Ver demo en vivo","card.repo":"Explorar en GitHub","card.related":"Proyectos relacionados"
+  }
+};
 
+let currentLang = "en";
+let currentFilter = "all";
+
+function t(key){ return I18N[currentLang][key] || key; }
+
+function renderStaticText(){
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(I18N[currentLang][key] !== undefined){
+      el.innerHTML = I18N[currentLang][key];
+    }
+  });
+  document.documentElement.lang = currentLang;
+}
+
+function projectById(id){ return PROJECTS.find(p=>p.id===id); }
+
+function renderProjects(){
+  const grid = document.getElementById("projectGrid");
+  grid.innerHTML = "";
+  const list = currentFilter === "all" ? PROJECTS : PROJECTS.filter(p=>p.category===currentFilter);
+
+  list.forEach(p=>{
+    const card = document.createElement("article");
+    card.className = "card";
+    card.setAttribute("tabindex","0");
+
+    const relatedChips = (p.related||[]).map(rid=>{
+      const rp = projectById(rid);
+      if(!rp) return "";
+      return `<span class="chip" data-jump="${rid}">${rp.title[currentLang]}</span>`;
+    }).join("");
+
+    card.innerHTML = `
+      <div class="card-top">
+        <h3>${p.title[currentLang]}</h3>
+      </div>
+      <div class="card-cat">${t('filter.'+p.category) || p.category}</div>
+      <p class="desc">${p.desc[currentLang]}</p>
+      <div class="tags">${p.tech.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+      <div class="card-actions">
+        ${p.demo ? `<a class="primary" href="${p.demo}" target="_blank" rel="noopener">${t('card.demo')} ↗</a>` : ""}
+        <a href="${p.repo}" target="_blank" rel="noopener">${t('card.repo')} ↗</a>
+      </div>
+      ${relatedChips ? `<div class="related-strip">
+        <span class="lbl">${t('card.related')}</span>
+        <div class="chips">${relatedChips}</div>
+      </div>` : ""}
+    `;
+    grid.appendChild(card);
+  });
+
+  // related chip jump-to-card behavior
+  grid.querySelectorAll(".chip").forEach(chip=>{
+    chip.addEventListener("click", ()=>{
+      const id = chip.getAttribute("data-jump");
+      const target = projectById(id);
+      if(target){
+        currentFilter = "all";
+        document.querySelectorAll(".filter-pill").forEach(b=>b.classList.toggle("active", b.dataset.filter==="all"));
+        renderProjects();
+        // scroll to the matching card by title text after re-render
+        setTimeout(()=>{
+          const cards = document.querySelectorAll("#projectGrid .card h3");
+          cards.forEach(h=>{ if(h.textContent === target.title[currentLang]) h.closest(".card").scrollIntoView({behavior:"smooth", block:"center"}); });
+        }, 0);
+      }
+    });
+  });
+}
+
+document.getElementById("filters").addEventListener("click", e=>{
+  const btn = e.target.closest(".filter-pill");
+  if(!btn) return;
+  currentFilter = btn.dataset.filter;
+  document.querySelectorAll(".filter-pill").forEach(b=>b.classList.toggle("active", b===btn));
+  renderProjects();
+});
+
+document.getElementById("langToggle").addEventListener("click", ()=>{
+  currentLang = currentLang === "en" ? "es" : "en";
+  renderStaticText();
+  renderProjects();
+});
+
+document.getElementById("themeToggle").addEventListener("click", ()=>{
+  const html = document.documentElement;
+  const isBW = html.getAttribute("data-theme") === "bw";
+  html.setAttribute("data-theme", isBW ? "default" : "bw");
+});
+
+renderStaticText();
+renderProjects();
+</script>
 </body>
 </html>
