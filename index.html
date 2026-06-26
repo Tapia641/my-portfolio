@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luis Tapia — Portfolio</title>
+<title>Luis Tapia — Software Engineer Portfolio</title>
 <meta name="description" content="Portfolio of software engineering projects, case studies, and contact information.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -201,7 +201,7 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow" data-i18n="hero.eyebrow">Software & Network Engineer</div>
+      <div class="eyebrow" data-i18n="hero.eyebrow">Software &amp; Network Engineer</div>
       <h1 data-i18n="hero.title">Projects that ship,<br>scale, and stay simple.</h1>
       <p class="role" data-i18n="hero.role">Open to full-time and contract roles</p>
       <p class="lede" data-i18n="hero.lede">I build reliable backend systems and the occasional delightful frontend. Below is a working selection of projects pulled directly from my GitHub — code, demos, and the reasoning behind each one.</p>
@@ -255,7 +255,7 @@
       <h2 data-i18n="about.title">Luis Tapia</h2>
       <div class="about-actions">
         <a class="btn btn-primary" href="./src/resume.pdf" target="_blank" rel="noopener" data-i18n="about.resume">View résumé</a>
-        <a class="btn btn-ghost" href="https://github.com/yourusername" data-i18n="about.github">GitHub profile</a>
+        <a class="btn btn-ghost" href="https://github.com/tapia641" data-i18n="about.github">GitHub profile</a>
       </div>
     </div>
     <div>
@@ -306,8 +306,8 @@ const PROJECTS = [
       es: "Motor de reconciliación basado en eventos que procesa más de 2M de transacciones financieras al día con entrega garantizada exactamente una vez."
     },
     tech: ["Go", "Kafka", "PostgreSQL", "Docker"],
-    demo: "https://",
-    repo: "https://",
+    demo: "https://ledgersync-demo.example.com",
+    repo: "https://github.com/tapia641/ledger-sync",
     related: ["queue-router", "infra-as-code"]
   },
   {
@@ -320,9 +320,87 @@ const PROJECTS = [
     },
     tech: ["Python", "Redis", "FastAPI"],
     demo: null,
-    repo: "https://",
+    repo: "https://github.com/tapia641/queue-router",
     related: ["ledger-sync"]
   },
+  {
+    id: "churn-predictor",
+    category: "data",
+    title: { en: "Churn Predictor", es: "Predictor de Abandono" },
+    desc: {
+      en: "Gradient-boosted churn model with a feature pipeline and an explainability dashboard for non-technical stakeholders.",
+      es: "Modelo de abandono basado en gradient boosting con un pipeline de características y un panel de explicabilidad para usuarios no técnicos."
+    },
+    tech: ["Python", "scikit-learn", "Pandas", "Streamlit"],
+    demo: "https://churn-demo.example.com",
+    repo: "https://github.com/tapia641/churn-predictor",
+    related: ["log-anomaly"]
+  },
+  {
+    id: "log-anomaly",
+    category: "data",
+    title: { en: "Log Anomaly Detector", es: "Detector de Anomalías en Logs" },
+    desc: {
+      en: "Streaming anomaly detection over application logs using rolling statistics, cutting alert noise by 60%.",
+      es: "Detección de anomalías en tiempo real sobre logs de aplicación usando estadísticas móviles, reduciendo el ruido de alertas en un 60%."
+    },
+    tech: ["Python", "Kafka", "NumPy"],
+    demo: null,
+    repo: "https://github.com/tapia641/log-anomaly",
+    related: ["churn-predictor", "queue-router"]
+  },
+  {
+    id: "portfolio-cms",
+    category: "frontend",
+    title: { en: "Portfolio CMS", es: "CMS de Portafolio" },
+    desc: {
+      en: "Headless content layer for developer portfolios with live preview, used as the engine behind this very page.",
+      es: "Capa de contenido headless para portafolios de desarrolladores con vista previa en vivo, el motor detrás de esta misma página."
+    },
+    tech: ["TypeScript", "React", "Vite"],
+    demo: "https://portfolio-cms-demo.example.com",
+    repo: "https://github.com/tapia641/portfolio-cms",
+    related: ["dashboard-kit"]
+  },
+  {
+    id: "dashboard-kit",
+    category: "frontend",
+    title: { en: "Dashboard Kit", es: "Kit de Paneles" },
+    desc: {
+      en: "Accessible, themeable charting components built on top of D3, with keyboard navigation and screen-reader labels.",
+      es: "Componentes de gráficos accesibles y personalizables construidos sobre D3, con navegación por teclado y etiquetas para lectores de pantalla."
+    },
+    tech: ["React", "D3.js", "TypeScript"],
+    demo: "https://dashboard-kit-demo.example.com",
+    repo: "https://github.com/tapia641/dashboard-kit",
+    related: ["portfolio-cms"]
+  },
+  {
+    id: "infra-as-code",
+    category: "tools",
+    title: { en: "Infra-as-Code Starter", es: "Plantilla de Infraestructura como Código" },
+    desc: {
+      en: "Opinionated Terraform + GitHub Actions starter that takes a new service from zero to a deployed staging environment in one PR.",
+      es: "Plantilla de Terraform y GitHub Actions que lleva un nuevo servicio de cero a un entorno de staging desplegado en un solo PR."
+    },
+    tech: ["Terraform", "AWS", "GitHub Actions"],
+    demo: null,
+    repo: "https://github.com/tapia641/infra-as-code",
+    related: ["ledger-sync"]
+  },
+  {
+    id: "cli-snap",
+    category: "tools",
+    title: { en: "snap-cli", es: "snap-cli" },
+    desc: {
+      en: "A tiny CLI that snapshots and diffs local database state during migrations, now used across three internal teams.",
+      es: "Una CLI pequeña que captura y compara el estado de la base de datos local durante migraciones, usada en tres equipos internos."
+    },
+    tech: ["Go", "SQLite"],
+    demo: null,
+    repo: "https://github.com/tapia641/snap-cli",
+    related: ["queue-router"]
+  }
 ];
 
 const I18N = {
@@ -343,7 +421,7 @@ const I18N = {
     "contact.title":"Let's talk","contact.lede":"Reviewing this for a role? I'm happy to walk through any project in more depth.",
     "contact.email":"Email me","contact.linkedin":"LinkedIn","contact.github":"GitHub",
     "footer.text":"Built with HTML, CSS, and vanilla JS. © 2026 Luis Tapia.",
-    "card.demo":"Uploading...","card.repo":"Explore on GitHub","card.related":"Related projects"
+    "card.demo":"View live demo","card.repo":"Explore on GitHub","card.related":"Related projects"
   },
   es: {
     "nav.work":"Proyectos","nav.about":"Acerca","nav.contact":"Contacto",
@@ -362,7 +440,7 @@ const I18N = {
     "contact.title":"Hablemos","contact.lede":"¿Estás revisando esto para un puesto? Con gusto puedo explicar cualquier proyecto con más detalle.",
     "contact.email":"Envíame un correo","contact.linkedin":"LinkedIn","contact.github":"GitHub",
     "footer.text":"Construido con HTML, CSS y JS puro. © 2026 Luis Tapia.",
-    "card.demo":"Subiendo...","card.repo":"Explorar en GitHub","card.related":"Proyectos relacionados"
+    "card.demo":"Ver demo en vivo","card.repo":"Explorar en GitHub","card.related":"Proyectos relacionados"
   }
 };
 
