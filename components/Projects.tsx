@@ -7,6 +7,7 @@ type Repo = {
   id: number;
   name: string;
   html_url: string;
+  homepage?: string | null;
   description: string | null;
   language: string | null;
   stargazers_count: number;
@@ -65,16 +66,13 @@ export default function Projects() {
     <>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {repos.map((r) => (
-          <a
+          <article
             key={r.id}
-            href={r.html_url}
-            {...EXT}
             className="group flex min-h-44 flex-col justify-between rounded-2xl border border-fg/15 p-6 transition hover:bg-fg hover:text-bg"
           >
             <div>
               <div className="flex items-start justify-between gap-4">
                 <h3 className="break-all text-lg font-semibold tracking-tight">{r.name}</h3>
-                <span aria-hidden>↗</span>
               </div>
               <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted group-hover:text-bg/70">
                 {r.description ?? 'No description.'}
@@ -87,7 +85,25 @@ export default function Projects() {
                 <span key={t}>#{t}</span>
               ))}
             </div>
-          </a>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {r.homepage?.trim() && (
+                <a
+                  href={r.homepage}
+                  {...EXT}
+                  className="rounded-full border border-fg/20 px-3 py-1.5 text-xs font-medium transition group-hover:border-bg/30 group-hover:text-bg hover:bg-fg/5 group-hover:hover:bg-bg/10"
+                >
+                  Ver demo en vivo ↗
+                </a>
+              )}
+              <a
+                href={r.html_url}
+                {...EXT}
+                className="rounded-full border border-fg/20 px-3 py-1.5 text-xs font-medium transition group-hover:border-bg/30 group-hover:text-bg hover:bg-fg/5 group-hover:hover:bg-bg/10"
+              >
+                Ver repositorio ↗
+              </a>
+            </div>
+          </article>
         ))}
       </div>
       <a href={LINKS.github} {...EXT} className="mt-8 inline-block text-sm underline underline-offset-4">
